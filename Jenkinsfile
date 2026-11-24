@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "/usr/local/go/bin:${env.PATH}"
         IMAGE_NAME = "amitachari/frontend:${GIT_COMMIT}"
     }
 
@@ -9,7 +10,7 @@ pipeline {
 
         stage('Git Checkout') {
             steps {
-                git url: 'https://github.com/ITkannadigaru/frontend.git', branch: 'main'
+                git url: 'https://github.com/amitachari-devops-ecommerce/frontend.git', branch: 'main'
             }
         }
 
@@ -57,7 +58,7 @@ pipeline {
                             echo "gitops directory exists. Removing it..."
                             rm -rf gitops
                         fi
-                        git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/ITkannadigaru/GitOps.git gitops
+                        git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/amitachari-devops-ecommerce/GitOps.git gitops
                         cd gitops/base/frontend/
 
                         git config user.email "jenkins@ci.com"
